@@ -1,0 +1,7 @@
+server
+*.exe
+.*
+*.yaml
+log
+!.gitignore
+!.github
