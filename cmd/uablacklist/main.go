@@ -2,8 +2,7 @@ package main
 
 import (
 	"flag"
-	"fmt"
-	"os"
+	"log"
 
 	"github.com/RomanAvdeenko/uablacklist/internal/app/uablacklist"
 )
@@ -22,7 +21,7 @@ func main() {
 	cfg := uablacklist.NewConfig(jsonURL, resultFileName)
 
 	if err := uablacklist.Start(*cfg); err != nil {
-		fmt.Fprintf(os.Stderr, "error: %v\n", err)
-		os.Exit(1)
+		log.Fatalf("error: %v\n", err)
+
 	}
 }
