@@ -4,6 +4,6 @@
 log
 !.gitignore
 !.github
-!*uablacklist/
+!uablacklist/
 uablacklist
 out.txt
