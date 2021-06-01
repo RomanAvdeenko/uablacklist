@@ -1,7 +1,9 @@
-uablacklist
 *.exe
 .*
 *.yaml
 log
 !.gitignore
 !.github
+!*uablacklist/
+uablacklist
+out.txt

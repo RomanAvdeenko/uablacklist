@@ -1,8 +1,8 @@
 package model
 
-var BlockRecords map[string]blockRecord
+var BlockedRecords map[string]blockedRecord
 
-type blockRecord struct {
+type blockedRecord struct {
 	Alias string   `json:"alias"`
 	Term  string   `json:"term"`
 	Urls  []string `json:"urls"`
