@@ -1,8 +1,4 @@
 !.gitignore
-!.github/
-!uablacklist/
-uablacklist
-*.exe
 .*
-*.yaml
-log
+*.exe
+
