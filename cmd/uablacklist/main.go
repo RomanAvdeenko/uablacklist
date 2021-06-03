@@ -16,7 +16,7 @@ var (
 func init() {
 	flag.StringVar(&jsonURL, "url", "https://uablacklist.net/all.json", "JSON URL address")
 	flag.StringVar(&tplFileName, "tpl", "db.rpz.zone.tpl", "template file name")
-	flag.StringVar(&resultFileName, "out", "out.txt", "result file name")
+	flag.StringVar(&resultFileName, "out", "db.rpz.zone", "result file name")
 	flag.Parse()
 }
 func main() {
