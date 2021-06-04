@@ -10,7 +10,7 @@ on:
 
 jobs:
   lint:
-    name: Rin linter
+    name: Run linter
     runs-on: ubuntu-latest
     steps:
       - name: Run checkout
@@ -19,16 +19,17 @@ jobs:
         uses: actions-contrib/golangci-lint@v1
 
   build:
+    name: Run build
     runs-on: ubuntu-latest
     steps:
       - name: Run checkout
-      uses: actions/checkout@v2
-    - name: Set up Go
-      uses: actions/setup-go@v2
-      with:
-        go-version: 1.15
-    - name: Build
-      run: go build -v ./...
-    - name: Test
-      run: go test -v ./...
+        uses: actions/checkout@v2
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.15
+      - name: Build
+        run: go build -v ./...
+      - name: Test
+        run: go test -v ./...
       
