@@ -75,7 +75,7 @@ func (s *server) makeFile(tplFileName, outFileName string) error {
 	tplData.RECORDS = make([]string, 0, len(model.BlockedRecords))
 	// punycode
 	p := idna.New()
-	for key, _ := range model.BlockedRecords {
+	for key := range model.BlockedRecords {
 		punyKey, err := p.ToASCII(key)
 		if err != nil {
 			continue
