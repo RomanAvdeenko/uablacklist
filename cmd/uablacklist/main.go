@@ -26,5 +26,4 @@ func main() {
 		log.Fatalf("error: %v\n", err)
 
 	}
-	// test CI
 }
