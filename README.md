@@ -1,7 +1,7 @@
 # uablacklist
 * Usage of ./uablacklist:
 	* -out string
-	result file name (default "out.txt")
+	result file name (default "db.rpz.zone")
 	* -tpl string
 		template file name (default "db.rpz.zone.tpl")
 	* -url string
