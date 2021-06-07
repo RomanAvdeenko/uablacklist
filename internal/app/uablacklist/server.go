@@ -26,8 +26,8 @@ func newServer() (*server, error) {
 }
 
 func writeGenMessage(file *os.File) error {
-	n, err := file.WriteString(generationMessage)
-	if err != nil || n < 0 {
+	_, err := file.WriteString(generationMessage)
+	if err != nil {
 		return err
 	}
 	return nil
