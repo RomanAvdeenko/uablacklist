@@ -1,7 +1,6 @@
 .*
 *.exe
-uablacklist
+./uablacklist
 !.gitignore
-!/uablacklist/
 !.github/
 

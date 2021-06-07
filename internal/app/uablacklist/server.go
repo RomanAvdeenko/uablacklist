@@ -12,6 +12,8 @@ import (
 	"golang.org/x/net/idna"
 )
 
+const generationMessage = "; This code is generated!!!\n"
+
 type server struct {
 	client *http.Client
 }
@@ -35,7 +37,7 @@ func Start(cfg Config) error {
 		return err
 	}
 	//
-	if err := s.makeFile(cfg.tplFileName, cfg.outFileName); err != nil {
+	if err := s.makeFile(cfg.tplFileName, cfg.outFileName, cfg.dropURL); err != nil {
 		return err
 	}
 	log.Print("Server finish")
@@ -55,7 +57,7 @@ func (s *server) getJson(url string, target interface{}) error {
 }
 
 // Make config file
-func (s *server) makeFile(tplFileName, outFileName string) error {
+func (s *server) makeFile(tplFileName, outFileName, dropURL string) error {
 	// Template manipulation
 	tpl, err := template.ParseFiles(tplFileName)
 	if err != nil {
@@ -67,12 +69,17 @@ func (s *server) makeFile(tplFileName, outFileName string) error {
 		return err
 	}
 
+	file.WriteString(generationMessage)
+
 	var tplData struct {
-		SERIAL  string
-		RECORDS []string
+		SERIAL   string
+		DROP_URL string
+		RECORDS  []string
 	}
-	tplData.SERIAL = "123456"
+	tplData.SERIAL = time.Now().Format("2006010215")
+	tplData.DROP_URL = dropURL
 	tplData.RECORDS = make([]string, 0, len(model.BlockedRecords))
+
 	// punycode
 	p := idna.New()
 	for key := range model.BlockedRecords {
@@ -87,6 +94,8 @@ func (s *server) makeFile(tplFileName, outFileName string) error {
 	if err != nil {
 		return err
 	}
+
+	file.WriteString(generationMessage)
 
 	return nil
 }
