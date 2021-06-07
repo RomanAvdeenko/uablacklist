@@ -25,6 +25,14 @@ func newServer() (*server, error) {
 	return s, nil
 }
 
+func writeGenMessage(file *os.File) error {
+	n, err := file.WriteString(generationMessage)
+	if err != nil || n < 0 {
+		return err
+	}
+	return nil
+}
+
 // Start work
 func Start(cfg Config) error {
 	s, err := newServer()
@@ -69,8 +77,7 @@ func (s *server) makeFile(tplFileName, outFileName, dropURL string) error {
 		return err
 	}
 
-	_, err = file.WriteString(generationMessage)
-	if err != nil {
+	if err := writeGenMessage(file); err != nil {
 		return err
 	}
 
@@ -98,9 +105,7 @@ func (s *server) makeFile(tplFileName, outFileName, dropURL string) error {
 		return err
 	}
 
-	file.WriteString(generationMessage)
-	_, err = file.WriteString(generationMessage)
-	if err != nil {
+	if err := writeGenMessage(file); err != nil {
 		return err
 	}
 
