@@ -69,7 +69,10 @@ func (s *server) makeFile(tplFileName, outFileName, dropURL string) error {
 		return err
 	}
 
-	file.WriteString(generationMessage)
+	_, err = file.WriteString(generationMessage)
+	if err != nil {
+		return err
+	}
 
 	var tplData struct {
 		SERIAL   string
@@ -96,6 +99,10 @@ func (s *server) makeFile(tplFileName, outFileName, dropURL string) error {
 	}
 
 	file.WriteString(generationMessage)
+	_, err = file.WriteString(generationMessage)
+	if err != nil {
+		return err
+	}
 
 	return nil
 }
