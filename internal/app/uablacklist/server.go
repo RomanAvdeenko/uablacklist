@@ -44,6 +44,7 @@ func Start(cfg Config) error {
 	if err := s.getJson(cfg.url, &model.BlockedRecords); err != nil {
 		return err
 	}
+
 	//
 	if err := s.makeFile(cfg.tplFileName, cfg.outFileName, cfg.dropURL); err != nil {
 		return err
@@ -72,6 +73,12 @@ func (s *server) makeFile(tplFileName, outFileName, dropURL string) error {
 		return err
 	}
 
+	// If the config file exists then rename it.
+	if _, err = os.Stat(outFileName); err == nil {
+		os.Rename(outFileName, outFileName+".orig")
+	}
+
+	//
 	file, err := os.Create(outFileName)
 	if err != nil {
 		return err
