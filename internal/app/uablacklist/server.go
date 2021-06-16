@@ -75,7 +75,10 @@ func (s *server) makeFile(tplFileName, outFileName, dropURL string) error {
 
 	// If the config file exists then rename it.
 	if _, err = os.Stat(outFileName); err == nil {
-		os.Rename(outFileName, outFileName+".orig")
+		if err = os.Rename(outFileName, outFileName+".orig"); err != nil {
+			return err
+		}
+
 	}
 
 	//
