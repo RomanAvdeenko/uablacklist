@@ -1,8 +1,7 @@
 .*
-*.exe
-./db.rpz.zone
-./db.rpz.zone.orig
-./generator
+db.rpz.zone
+db.rpz.zone.orig
+generator
 !.gitignore
 !.github/
 
