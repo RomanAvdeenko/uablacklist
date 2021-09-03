@@ -3,27 +3,29 @@ package main
 import (
 	"flag"
 	"log"
-	"uablacklist/internal/app/uablacklist"
+	"uablacklist/internal/app/generator"
 )
 
 var (
-	jsonURL,
+	jsonURI,
+	blockedFileName,
 	tplFileName,
 	resultFileName,
-	dropURL string
+	dropIP string
 )
 
 func init() {
-	flag.StringVar(&jsonURL, "url", "https://uablacklist.net/all.json", "JSON URL address")
+	flag.StringVar(&jsonURI, "json", "https://uablacklist.net/all.json", "JSON URI address")
+	flag.StringVar(&blockedFileName, "file", "./configs/blocked_sites.json", "blocked sites file name")
 	flag.StringVar(&tplFileName, "tpl", "./configs/db.rpz.zone.tpl", "template file name")
-	flag.StringVar(&resultFileName, "out", "db.rpz.zone", "result file name")
-	flag.StringVar(&dropURL, "drop", "127.0.0.1", "rpz drop URL")
+	flag.StringVar(&resultFileName, "out", "./db.rpz.zone", "result file name")
+	flag.StringVar(&dropIP, "drop", "127.0.0.1", "rpz drop IP address")
 	flag.Parse()
 }
 func main() {
-	cfg := uablacklist.NewConfig(jsonURL, tplFileName, resultFileName, dropURL)
+	cfg := generator.NewConfig(jsonURI, blockedFileName, tplFileName, resultFileName, dropIP)
 
-	if err := uablacklist.Start(*cfg); err != nil {
+	if err := generator.Start(*cfg); err != nil {
 		log.Fatalf("error: %v\n", err)
 
 	}

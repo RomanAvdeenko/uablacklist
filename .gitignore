@@ -1,6 +1,6 @@
 .*
 *.exe
-./uablacklist
+./generator
 !.gitignore
 !.github/
 
