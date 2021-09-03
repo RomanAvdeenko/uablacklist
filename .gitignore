@@ -1,6 +1,5 @@
 .*
-db.rpz.zone
-db.rpz.zone.orig
+db.rpz.zone*
 generator
 !.gitignore
 !.github/
