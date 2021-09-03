@@ -29,7 +29,9 @@ func (f *File) Getter(uri string, store *store.Store) error {
 	}
 
 	for _, val := range blockedRecords.Urls {
-		store.AddDomainName(val)
+		if err := store.AddDomainName(val); err != nil {
+			return fmt.Errorf("AddDomainName error: %w", err)
+		}
 	}
 	return nil
 }

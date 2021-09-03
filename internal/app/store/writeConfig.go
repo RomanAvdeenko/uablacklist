@@ -4,8 +4,6 @@ import (
 	"html/template"
 	"os"
 	"time"
-
-	"golang.org/x/net/idna"
 )
 
 //
@@ -50,15 +48,8 @@ func (s *Store) MakeFile(tplFileName, outFileName, dropURL string) error {
 	tplData.DROP_URL = dropURL
 
 	tplData.RECORDS = make([]string, 0, len(s.GetDomainNames()))
-
-	// punycode
-	p := idna.New()
 	for key := range s.GetDomainNames() {
-		punyKey, err := p.ToASCII(string(key))
-		if err != nil {
-			continue
-		}
-		tplData.RECORDS = append(tplData.RECORDS, punyKey)
+		tplData.RECORDS = append(tplData.RECORDS, string(key))
 	}
 
 	err = tpl.Execute(file, tplData)

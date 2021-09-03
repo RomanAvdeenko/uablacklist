@@ -12,8 +12,16 @@ func New() *Store {
 	return &Store{domainNames: make(map[model.DomainName]struct{})}
 }
 
-func (s *Store) AddDomainName(val string) {
-	s.domainNames[model.DomainName(val)] = struct{}{}
+func (s *Store) AddDomainName(val string) error {
+	domainName := model.DomainName(val)
+	if err := domainName.Punycode(); err != nil {
+		return err
+	}
+	if err := domainName.Validate(); err != nil {
+		return err
+	}
+	s.domainNames[domainName] = struct{}{}
+	return nil
 }
 
 func (s *Store) GetDomainNames() map[model.DomainName]struct{} {

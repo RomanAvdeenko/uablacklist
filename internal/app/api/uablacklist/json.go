@@ -35,7 +35,9 @@ func (u *Uablacklist) Get(uri string, store *store.Store) error {
 	}
 
 	for key := range blockedRecords {
-		store.AddDomainName(key)
+		if err := store.AddDomainName(key); err != nil {
+			return fmt.Errorf("AddDomainName error: %w", err)
+		}
 	}
 
 	return nil
